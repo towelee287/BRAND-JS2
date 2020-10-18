@@ -2,7 +2,8 @@
 // const PRICES = [52, 53, 55, 67, 69, 94, 23, 45];
 
 //
-const catalog = {
+// const catalog = {
+export default {
     items: [],
     basket: null,
     container: null,
@@ -80,7 +81,8 @@ const catalog = {
     <div></div> class half-star
 </div> */}
 
-catalog.init();
+// убираем для webpack catalog.init();
+// catalog.init();
 //
 
 // function createNewItem(name, price) {
