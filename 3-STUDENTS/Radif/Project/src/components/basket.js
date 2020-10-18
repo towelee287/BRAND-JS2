@@ -1,5 +1,6 @@
-
-const basket = {
+// для webpack const basket меняем на export default
+// const basket = {
+export default {
     items: [],
     wrapper: null,
     container: null,
@@ -85,4 +86,5 @@ const basket = {
     }
 }
 
-basket.init()
+// убираем для webpack basket.init();
+// basket.init();
