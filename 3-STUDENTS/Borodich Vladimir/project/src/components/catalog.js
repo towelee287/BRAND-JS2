@@ -1,19 +1,15 @@
-export default (url, container) => {
-  return {
-    _items: null,
-    _container: null,
+class Catalog {
 
-    async init() {
-      this._container = container;
-      await this._getProducts(url);
-      this._render();
-      console.log(`Container ${this._container.id}  init`);
-    },
+  constructor(url, container) {
+    this._container = container;
+    this._getProducts(url);
+    console.log(`Container ${this._container.id}  init`);
+  }
 
-    _render() {
-      let content = '';
-      this._items.products.forEach((item) => {
-        content += `<div class="card">
+  _render() {
+    let content = '';
+    this._items.products.forEach((item) => {
+      content += `<div class="card">
                       <div class="card__hover">
                         <a  href="#" class="card__button-add" data-item='${JSON.stringify(item)}' data-button="addProduct">
                           <img   src="../src/assets/images/cart-white.png" alt="cart" class="card__cart-img">
@@ -39,13 +35,15 @@ export default (url, container) => {
                         </div>
                       </div>
                     </div> `;
-      });
-      this._container.innerHTML = content;
-    },
+    });
+    this._container.innerHTML = content;
+  }
 
-    async _getProducts(url) {
-      let res = await fetch(url);
-      res.status ? (this._items = await res.json()) : (this._items = []);
-    }
-  };
+  async _getProducts(url) {
+    let res = await fetch(url);
+    res.status ? (this._items = await res.json()) : (this._items = []);
+    this._render();
+  }
+
 }
+export default Catalog;

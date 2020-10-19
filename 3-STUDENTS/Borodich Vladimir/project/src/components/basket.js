@@ -1,13 +1,6 @@
-export default {
-    _items: [],
-    _container: null,
-    _containerTotalSum: null,
-    _badge: null,
-    _storage: null,
-    checkoutButton: null,
-    goToCartButton: null,
-
-    init() {
+class Basket {
+    
+    constructor() {
         this._container = document.querySelector('#basket');
         this._containerTotalSum = document.querySelector('#basket-total');
         this._badge = document.querySelector('#cart-badge');
@@ -18,7 +11,7 @@ export default {
         this._render();
         this._addListener();
         console.log('Basket init');
-    },
+    }
 
     _render() {
         let str = '';
@@ -62,11 +55,11 @@ export default {
         this._badge.innerText = this._items.length;
         this._containerTotalSum.innerText = '$' + total;
         this._container.innerHTML = str;
-    },
+    }
 
     _addListener() {
         document.addEventListener('click', this._handlerClick.bind(this));
-    },
+    }
 
     _handlerClick(event) {
         if (event.target.dataset.button === 'addProduct' || event.target.parentNode.dataset.button === 'addProduct') {
@@ -80,16 +73,16 @@ export default {
             event.preventDefault();
             return;
         }
-    },
+    }
 
     _getStorage() {
         let items = this._storage.getItem('basket');
         items ? this._items = JSON.parse(items) : this._setStorage([]);
-    },
+    }
 
     _setStorage(data) {
         this._storage.setItem('basket', JSON.stringify(data));
-    },
+    }
 
     _addItem(item) {
         let product = Object.assign({}, { amount: 1 }, JSON.parse(item));
@@ -98,7 +91,7 @@ export default {
         this._render()
         this._setStorage(this._items);
 
-    },
+    }
 
     _removeItem(id) {
         let product = this._items.find(item => item.id === +id);
@@ -108,3 +101,5 @@ export default {
 
     }
 }
+
+export default Basket;
