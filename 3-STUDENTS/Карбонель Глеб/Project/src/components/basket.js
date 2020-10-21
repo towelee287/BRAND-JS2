@@ -4,7 +4,6 @@ export default {
     container: null,
     url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json',
     init() {
-        console.log('BASKET');
         this.wrapper = document.querySelector('.drop-cart');
         this.container = document.querySelector('#basket');
 
