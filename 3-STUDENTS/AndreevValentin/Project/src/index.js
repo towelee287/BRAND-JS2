@@ -1,5 +1,5 @@
-import "./layout/css/common.css";
-import "./layout/css/index.css";
+import "./layout/scss/common.scss";
+import "./layout/scss/index.scss";
 
 import app from "./components";
 app();
