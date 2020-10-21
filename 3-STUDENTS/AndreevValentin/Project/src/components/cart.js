@@ -1,4 +1,6 @@
-const cart = {
+import {padNum} from "./common.js";
+
+export default {
 	popup: null,
 	itemsWrapper: null,
 	totalBox: null,
@@ -69,5 +71,3 @@ const cart = {
 		this._render();
 	}
 };
-
-cart.init();

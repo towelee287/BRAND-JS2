@@ -1,3 +1,5 @@
+import {padNum} from "./common.js";
+
 function getItems() {
 	// This should be retrieved from a server...
 	return [
@@ -44,12 +46,12 @@ function getItems() {
 	];
 }
 
-const catalog = {
+export default {
 	container: null,
 	items: [],
 	cart: null,
 
-	init(container, itemsPerRow) {
+	init(cart, container, itemsPerRow) {
 		this.container = container;
 		this.items = getItems();
 		this.cart = cart;
@@ -65,7 +67,7 @@ const catalog = {
 			}
 
 			const id = +e.target.dataset.itemId;
-			cart.add(id, this.items[id]);
+			this.cart.add(id, this.items[id]);
 		});
 	},
 
