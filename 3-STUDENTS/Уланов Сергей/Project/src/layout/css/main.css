@@ -237,7 +237,7 @@ body a, body button, input[type="submit"] {
     color: #f16d7f;
 }
 .hot-offers {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .hot-offers__square {

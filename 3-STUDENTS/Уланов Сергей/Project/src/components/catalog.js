@@ -1,11 +1,13 @@
 
-export default {
-    items: [],
-    basket: null,
-    container: null,
-    imgFTPurl: 'https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop',
-    url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/catalog.json',
-    init() {
+export default class Catalog {
+    constructor(){
+    this.items = [],
+    this.basket = null,
+    this.container = null,
+    this.imgFTPurl = 'https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop',
+    this.url = 'https://raw.githubusercontent.com/kellolo/static/master/JSON/catalog.json'
+    }
+    init(basket) {
         this.container = document.querySelector('#catalog');
         this.basket = basket;
         // this.items = getItems();
@@ -19,10 +21,10 @@ export default {
         })
 
         
-    },
+    }
     _get(url) {
         return fetch(url).then(d => d.json()) 
-    },
+    }
     _handleEvents() {
         this.container.addEventListener('click', e => {
             if (e.target.name == 'add') {
@@ -35,7 +37,7 @@ export default {
                 this.basket.add(item)
             }
         })
-    },
+    }
     _render() {
         let htmlStr = '';
         this.items.forEach((item, index) => {
