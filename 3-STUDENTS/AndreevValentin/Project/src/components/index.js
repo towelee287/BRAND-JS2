@@ -1,7 +1,6 @@
-import cart from "./cart.js";
-import catalog from "./catalog.js";
+import Cart from "./cart.js";
+import Catalog from "./catalog.js";
 
 export default () => {
-	cart.init();
-	catalog.init(cart, document.getElementById("featuredItems"), 4);
+	new Catalog(new Cart(), document.getElementById("featuredItems"), 4);
 };

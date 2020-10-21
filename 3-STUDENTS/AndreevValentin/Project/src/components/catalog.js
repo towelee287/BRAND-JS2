@@ -46,19 +46,15 @@ function getItems() {
 	];
 }
 
-export default {
-	container: null,
-	items: [],
-	cart: null,
-
-	init(cart, container, itemsPerRow) {
+export default class Catalog {
+	constructor(cart, container, itemsPerRow) {
 		this.container = container;
 		this.items = getItems();
 		this.cart = cart;
 
 		this._handleEvents();
 		this._render(itemsPerRow);
-	},
+	}
 
 	_handleEvents() {
 		this.container.addEventListener("click", e => {
@@ -69,7 +65,7 @@ export default {
 			const id = +e.target.dataset.itemId;
 			this.cart.add(id, this.items[id]);
 		});
-	},
+	}
 
 	_render(itemsPerRow) {
 		let html = "";

@@ -1,19 +1,15 @@
 import {padNum} from "./common.js";
 
-export default {
-	popup: null,
-	itemsWrapper: null,
-	totalBox: null,
-	items: [],
-
-	init() {
+export default class Cart {
+	constructor() {
 		this.popup = document.getElementById("cartPopup");
 		this.itemsWrapper = document.getElementById("cartPopupItems");
 		this.totalBox = document.getElementById("cartPopupTotal");
+		this.items = [];
 
 		this._handleEvents();
 		this._render();
-	},
+	}
 
 	_handleEvents() {
 		document.getElementById("cartPopupButton").addEventListener("click", () => {
@@ -26,7 +22,7 @@ export default {
 
 			this.remove(+e.target.dataset.itemId);
 		});
-	},
+	}
 
 	_render() {
 		let html = "";
@@ -48,7 +44,7 @@ export default {
 		const total = this.items.reduce((a, b) => a + b.price * b.qty, 0);
 		this.totalBox.innerHTML =
 			`\$${Math.floor(total / 100)}.${padNum(total % 100)}`;
-	},
+	}
 
 	add(id, newItem) {
 		const item = this.items.find(x => x.id == id);
@@ -58,7 +54,7 @@ export default {
 			++item.qty;
 		}
 		this._render();
-	},
+	}
 
 	remove(id) {
 		const index = this.items.findIndex(x => x.id == id)
@@ -70,4 +66,4 @@ export default {
 		}
 		this._render();
 	}
-};
+}
