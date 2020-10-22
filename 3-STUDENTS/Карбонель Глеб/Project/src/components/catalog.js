@@ -7,7 +7,6 @@ export default {
     init(basket) {
         this.container = document.querySelector('#catalog');
         this.basket = basket;
-        // this.items = getItems();
         this._get(this.url)
         .then(items => {
             this.items = items;
