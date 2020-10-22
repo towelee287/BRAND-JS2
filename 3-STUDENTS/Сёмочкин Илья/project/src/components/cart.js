@@ -85,16 +85,16 @@ export default {
 
     _totalPrice() {
         let sum = 0;
-        for(let i = 0; i < this.items.length; i++) {
-            sum += this.items[i].productPrice * this.items[i].amount;
+        for(let item of this.items) {
+            sum += item.productPrice * item.amount;
         }
         return sum;
     },
 
     _totalQty() {
         let qty = 0;
-        for(let i = 0; i < this.items.length; i++) {
-            qty += this.items[i].amount;
+        for(let item of this.items) {
+            qty += item.amount;
         }
         return qty;
     }

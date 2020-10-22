@@ -402,7 +402,7 @@ body {
 .brand-top {
   height: inherit;
   display: flex;
-  background: url(../../assets/img/brand_top.jpg) no-repeat;
+  background: url(https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/brand_top.jpg) no-repeat;
   background-position: right; }
 
 .brand-top__header {
@@ -447,7 +447,7 @@ body {
 .news-and-offers__list1 {
   width: 560px;
   height: 542px;
-  background-image: url(../../assets/img/news-and-offers1.jpg);
+  background-image: url(https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/news-and-offers1.jpg);
   position: relative; }
 
 .news-and-offers__list1-content {
@@ -478,7 +478,7 @@ body {
 .news-and-offers__list2 {
   width: 560px;
   height: 261px;
-  background-image: url(../../assets/img/news-and-offers2.jpg);
+  background-image: url(https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/news-and-offers2.jpg);
   position: relative; }
 
 .news-and-offers__list2-content {
@@ -495,7 +495,7 @@ body {
 .news-and-offers__list3 {
   width: 560px;
   height: 261px;
-  background-image: url(../../assets/img/news-and-offers3.jpg);
+  background-image: url(https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/news-and-offers3.jpg);
   position: relative; }
 
 .news-and-offers__list3-content {
@@ -512,7 +512,7 @@ body {
 .news-and-offers__list4 {
   width: 560px;
   height: 542px;
-  background-image: url(../../assets/img/news-and-offers4.jpg);
+  background-image: url(https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/news-and-offers4.jpg);
   position: relative; }
 
 .news-and-offers__list4-content {
@@ -684,7 +684,7 @@ body {
 .special-offer__info {
   height: inherit;
   width: 767px;
-  background: url("../../assets/img/offer_overlay.png"), url("../../assets/img/special_offer_woman.jpg");
+  background: url("https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/offer_overlay.png"), url("https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/special_offer_woman.jpg");
   background-blend-mode: overlay;
   background-size: cover;
   position: relative; }
@@ -1640,7 +1640,7 @@ body {
 .subscribe-parent {
   width: 100%;
   height: 438px;
-  background: url("../../assets/img/subscribe-background.jpg") no-repeat;
+  background: url("https://raw.githubusercontent.com/Eliasz-S/static/main/JS1_shop_backgrounds/subscribe-background.jpg") no-repeat;
   background-position: bottom;
   background-size: cover;
   /*background-position: center;*/

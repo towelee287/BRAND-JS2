@@ -73,13 +73,13 @@
         }
         //
 
-        // function createNewItem(name, price) {
-        //     return {
-        //         productName: name,
-        //         productPrice: price
+        // class CreateNewItem {
+        //     constructor(name, price) {
+        //         this.name = name;
+        //         this.price = price;
         //     }
         // }
 
         // function getItems() {
-        //     return NAMES.map((name, index) => createNewItem(NAMES[index], PRICES [index]));
+        //     return NAMES.map((name, index) => new CreateNewItem(NAMES[index], PRICES [index]));
         // }
