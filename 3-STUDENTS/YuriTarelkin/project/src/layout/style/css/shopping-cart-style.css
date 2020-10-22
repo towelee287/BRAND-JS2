@@ -364,7 +364,7 @@ body {
 .subscribe {
   height: 438px;
   width: 100%;
-  background: url(../../../assets/bg/bg_subscribe.jpg) no-repeat, #ccc;
+  background: url(../../../assets/img/bg_subscribe.jpg) no-repeat, #ccc;
   background-blend-mode: overlay;
   background-size: cover;
   background-position: center bottom; }
