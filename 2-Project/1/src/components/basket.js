@@ -1,5 +1,4 @@
-// для webpack const basket меняем на export default
-// const basket = {
+
 export default {
     items: [],
     wrapper: null,
@@ -85,6 +84,3 @@ export default {
         this.container.innerHTML = htmlStr;
     }
 }
-
-// убираем для webpack basket.init();
-// basket.init();
