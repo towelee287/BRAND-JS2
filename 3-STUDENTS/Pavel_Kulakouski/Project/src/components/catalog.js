@@ -8,13 +8,13 @@ export default {
     container: null,
     imgFTPurl: 'https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop',
     url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/catalog.json',
-    init() {
+    init(basket) {
         this.container = document.querySelector('#catalog');
         this.basket = basket;
         // this.items = getItems();
         this._get(this.url)
         .then(items => {
-            this.items = items;
+            this.items = items; 
         })
         .then(() => {
             this._render();
