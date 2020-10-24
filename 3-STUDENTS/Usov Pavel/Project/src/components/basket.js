@@ -2,8 +2,8 @@ import BasketItem from './basketitem.js';
 import Parent from './parent_class.js'
 
 export default class Basket extends Parent{
-    constructor(container = "#basket", url = 'basket.json') {
-        super(container, url);
+    constructor(container = "#basket", url = 'basket.json', my_item = BasketItem) {
+        super(container, url, my_item);
         this.wrapper = document.querySelector('.drop-cart');  
     }
     _init() {
@@ -48,12 +48,5 @@ export default class Basket extends Parent{
             this.items.splice(this.items.indexOf(find), 1);
         }
         this._render();
-    }
-    _render() {
-        let htmlStr = '';
-        this.items.forEach((item) => {
-            htmlStr += new BasketItem(item).render();
-        });
-        this.container.innerHTML = htmlStr;
     }
 }

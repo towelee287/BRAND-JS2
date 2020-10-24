@@ -2,8 +2,8 @@ import CatalogItem from './catalogitem.js';
 import Parent from './parent_class.js'
 
 export default class Catalog extends Parent{
-    constructor(basket, container = '#catalog', url = 'catalog.json') {
-        super(container, url);
+    constructor(basket, container = '#catalog', url = 'catalog.json', my_item) {
+        super(container, url, my_item);
         this.basket = basket;
     }
     _init() {
@@ -28,14 +28,6 @@ export default class Catalog extends Parent{
             }
         })
     }
-    _render() {
-        let htmlStr = '';
-        this.items.forEach((item) => {
-            htmlStr += new CatalogItem(item).render();
-        });
-        this.container.innerHTML = htmlStr;
-    }
-
 }
 
 
