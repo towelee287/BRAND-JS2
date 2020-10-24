@@ -1,48 +1,24 @@
-import {padNum} from "./common.js";
+import CatalogItem from "./CatalogItem.js";
 
 function getItems() {
 	// This should be retrieved from a server...
 	return [
-		{
-			name: "Mango people T-shirt",
-			price: 5200,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/0.jpg"
-		},
-		{
-			name: "Banana people T-shirt",
-			price: 5300,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/1.jpg"
-		},
-		{
-			name: "Strawberry people T-shirt",
-			price: 5500,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/2.jpg"
-		},
-		{
-			name: "Orange people T-shirt",
-			price: 6700,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/3.jpg"
-		},
-		{
-			name: "Pumpkin people T-shirt",
-			price: 6900,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/4.jpg"
-		},
-		{
-			name: "Pineapple people T-shirt",
-			price: 9400,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/5.jpg"
-		},
-		{
-			name: "Cucumber people T-shirt",
-			price: 2300,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/6.jpg"
-		},
-		{
-			name: "Tomato people T-shirt",
-			price: 4500,
-			img: "https://raw.githubusercontent.com/VoidPhantom/gbimg/master/7.jpg"
-		}
+		new CatalogItem(0, "Mango people T-shirt", 5200,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/0.jpg"),
+		new CatalogItem(1, "Banana people T-shirt", 5300,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/1.jpg"),
+		new CatalogItem(2, "Strawberry people T-shirt", 5500,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/2.jpg"),
+		new CatalogItem(3, "Orange people T-shirt", 6700,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/3.jpg"),
+		new CatalogItem(4, "Pumpkin people T-shirt", 6900,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/4.jpg"),
+		new CatalogItem(5, "Pineapple people T-shirt", 9400,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/5.jpg"),
+		new CatalogItem(6, "Cucumber people T-shirt", 2300,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/6.jpg"),
+		new CatalogItem(7, "Tomato people T-shirt", 4500,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/7.jpg")
 	];
 }
 
@@ -63,28 +39,12 @@ export default class Catalog {
 			}
 
 			const id = +e.target.dataset.itemId;
-			this.cart.add(id, this.items[id]);
+			this.cart.add(this.items[id]);
 		});
 	}
 
 	_render(itemsPerRow) {
-		let html = "";
-		this.items = getItems();
-		this.items.forEach((item, id) => {
-			html += `<article class="snippet">
-				<img src="${item.img}"
-					alt="${item.name}" class="snippet__img">
-				<div class="snippet__hover">
-					<button class="snippet__addToCart"
-						data-item-id="${id}">Add to cart</button>
-				</div>
-				<div class="snippet__caption">
-					<h3 class="snippet__name">${item.name}</h3>
-					<p class="snippet__price">\$${Math.floor(item.price / 100)}`
-					+ `.${padNum(item.price % 100)}</p>
-				</div>
-			</article>`;
-		});
+		let html = this.items.map(item => item.toHtml()).join("");
 
 		// A hack to get items on the last row to align
 		for(let i = 0; i < itemsPerRow - 1; ++i) {
