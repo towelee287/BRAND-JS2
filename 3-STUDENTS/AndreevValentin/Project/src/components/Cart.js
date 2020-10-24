@@ -37,8 +37,7 @@ export default class Cart {
 	add(newItem) {
 		const item = this.items.find(x => x.id == newItem.id);
 		if(item === undefined) {
-			this.items.push(new CartItem(newItem.id, newItem.name, newItem.price,
-				newItem.img, 1));
+			this.items.push(new CartItem(newItem));
 		} else {
 			++item.qty;
 		}
