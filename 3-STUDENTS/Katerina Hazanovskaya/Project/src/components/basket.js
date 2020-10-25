@@ -1,14 +1,13 @@
+import BasketItem from './basketItem.js';
+import HeadClass from './headClass.js';
 
-export default class basket { 
-	constructor(items, wrapper, container) {
-    this.items: [],
-    this.wrapper: null,
-    this.container: null,
-    url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json',
+export default class Basket extends HeadClass { 
+	constructor(basket, container, url) {
+		super(basket, '#basket', '/basket.json');
+	}
     init() {
         this.wrapper = document.querySelector('.drop-cart');
-        this.container = document.querySelector('#basket');
-
+        
         this._get(this.url)
             .then(basketObject => {
                 this.items = basketObject.content
@@ -18,12 +17,7 @@ export default class basket {
                 this._handleEvents();
 				})
 			 }
-		}
-    },
 
-    _get(url) {
-        return fetch(url).then(d => d.json())
-    },
     _handleEvents() {
         document.querySelector('#toggle-basket').addEventListener('click', () => {
             this.wrapper.classList.toggle('hidden');
@@ -35,9 +29,9 @@ export default class basket {
                 this.remove(e.target.dataset.id)
             }
         })
-    },
+	 }
+	 
     add(item) {
-        // console.log('add ' + item.productName)
         let find = this.items.find(basketItem => basketItem.productId == item.productId);
 
         if (!find) {
@@ -46,7 +40,8 @@ export default class basket {
             find.amount++;
         }
         this._render();
-    },
+	 }
+	 
     remove(id) {
         let find = this.items.find(basketItem => basketItem.productId == id);
 
@@ -56,35 +51,15 @@ export default class basket {
             this.items.splice(this.items.indexOf(find), 1);
         }
         this._render();
-    },
+	 }
+	 
     _render() {
         let htmlStr = '';
         this.items.forEach((item) => {
-            htmlStr += `
-            <div class="drop-cart__product">
-                <a href="product.html" class="drop-cart__product-link">
-                    <img src="${item.productImg}"
-                        alt="product" class="drop-cart__product-img">
-                </a>
-                <div class="drop-cart__product-info">
-                    <a href="product.html" class="drop-cart__product-name">${item.productName}</a>
-                    <div class="drop-cart__product-stars">
-                        <i class="${item.stars > "0" ? "fas" : "far"} ${item.stars === "0.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                        <i class="${item.stars > "1" ? "fas" : "far"} ${item.stars === "1.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                        <i class="${item.stars > "2" ? "fas" : "far"} ${item.stars === "2.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                        <i class="${item.stars > "3" ? "fas" : "far"} ${item.stars === "3.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                        <i class="${item.stars > "4" ? "fas" : "far"} ${item.stars === "4.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                    </div>
-                    <div class="drop-cart__product-price">
-                        <span class="drop-cart__product-count">${item.amount} </span> x ${item.productPrice}
-                        <span class="drop-cart__product-sum"> = $${item.productPrice * item.amount}</span>
-                    </div>
-                </div>
-                <a href="#" data-id="${item.productId}" name="remove" class="drop-cart__product-close far fa-times-circle"></a>
-            </div>
-        `;
+            htmlStr += new BasketItem(item).render();
         });
         this.container.innerHTML = htmlStr;
-    }
+	 }
+	 
 }
 
