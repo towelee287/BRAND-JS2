@@ -1,4 +1,5 @@
 import {padNum} from "./common.js";
+import CartItem from "./CartItem.js";
 
 export default class Cart {
 	constructor() {
@@ -25,31 +26,18 @@ export default class Cart {
 	}
 
 	_render() {
-		let html = "";
-		this.items.forEach(item => {
-			html += `<li class="cartPopup__item">
-				<img src="${item.img}" alt="${item.name}"
-					class="cartPopup__itemImg">
-				<div class="cartPopup__itemDetails">
-					<p class="cartPopup__itemName">${item.name}</p>
-					<p class="cartPopup__itemPrice">${item.qty}&nbsp;&times;&nbsp;`
-					+ `\$${Math.floor(item.price / 100)}.${padNum(item.price % 100)}</p>
-				</div>
-				<button href="#" class="cartPopup__itemRemove fas fa-times-circle"
-					data-item-id="${item.id}"></button>
-			</li>`;
-		});
-		this.itemsWrapper.innerHTML = html;
+		this.itemsWrapper.innerHTML =
+			this.items.map(item => item.toHtml()).join("");
 
 		const total = this.items.reduce((a, b) => a + b.price * b.qty, 0);
 		this.totalBox.innerHTML =
 			`\$${Math.floor(total / 100)}.${padNum(total % 100)}`;
 	}
 
-	add(id, newItem) {
-		const item = this.items.find(x => x.id == id);
+	add(newItem) {
+		const item = this.items.find(x => x.id == newItem.id);
 		if(item === undefined) {
-			this.items.push(Object.assign({id, qty: 1}, newItem));
+			this.items.push(new CartItem(newItem));
 		} else {
 			++item.qty;
 		}
