@@ -18,10 +18,10 @@ class ProductContainer {
         let content = '';
         if (this._items.length > 0) {
             this._items.forEach((item) => {
-                content += new ProductItem(item, this._containerName, this._baseUrl + 'img/').render();
+                content += new ProductItem(item, this._containerName).render();
             });
         } else {
-            content = new ProductItem(null, this._containerName, this._baseUrl + 'img/').render();
+            content = new ProductItem(null, this._containerName).render();
         }
         this._container.innerHTML = content;
     }
