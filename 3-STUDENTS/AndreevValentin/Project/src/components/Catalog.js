@@ -1,24 +1,18 @@
 import CatalogItem from "./CatalogItem.js";
+import ItemList from "./ItemList.js";
 
-export default class Catalog {
+export default class Catalog extends ItemList {
 	constructor(cart, container, itemsPerRow) {
+		super(container,
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/catalog.json");
+
 		this.cart = cart;
-		this.container = container;
-		this.items = {};
+		this.itemsPerRow = itemsPerRow;
+	}
 
-		fetch(
-			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/catalog.json"
-		).then((response) => {
-			return response.json();
-		}).then((json) => {
-			json.forEach(jsonItem => {
-				this.items[jsonItem.id] = new CatalogItem(jsonItem.id, jsonItem.name,
-					jsonItem.price, jsonItem.img);
-			});
-
-			this._handleEvents();
-			this._render(itemsPerRow);
-		});
+	_makeItemObject(jsonItem) {
+		return new CatalogItem(jsonItem.id, jsonItem.name, jsonItem.price,
+			jsonItem.img, jsonItem.qty);
 	}
 
 	_handleEvents() {
@@ -33,10 +27,10 @@ export default class Catalog {
 	}
 
 	_render(itemsPerRow) {
-		let html = Object.values(this.items).map(item => item.toHtml()).join("");
+		let html = this._itemsToHtml();
 
 		// A hack to get items on the last row to align
-		for(let i = 0; i < itemsPerRow - 1; ++i) {
+		for(let i = 0; i < this.itemsPerRow - 1; ++i) {
 			html += '<div class="snippet__filler"></div>';
 		}
 
