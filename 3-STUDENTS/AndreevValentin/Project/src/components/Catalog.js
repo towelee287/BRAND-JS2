@@ -26,7 +26,7 @@ export default class Catalog extends ItemList {
 		});
 	}
 
-	_render(itemsPerRow) {
+	_render() {
 		let html = this._itemsToHtml();
 
 		// A hack to get items on the last row to align
