@@ -1,15 +1,15 @@
+import ObjectCreator from './objectCreator.js'
+import CartItem from './cartItem.js'
+import CartTotalPrice from './cartTotalPrice.js'
 
-export default {
-    items: [],
-    wrapper: null,
-    container: null,
-    qtyContainer: null,
-    url: 'https://raw.githubusercontent.com/Eliasz-S/static/main/JSON/cart.json',
-
-    init() {
-        this.wrapper = document.querySelector('.cart-dropdown'); 
-        this.container = document.querySelector('#checked-items'); 
+export default class Cart extends ObjectCreator {
+    constructor(container = '#checked-items', url = '/cart.json', items) {
+        super(container, url, items)
+        this.wrapper = document.querySelector('.cart-dropdown');
         this.qtyContainer = document.querySelector('#qty');
+    }
+    
+    _init() {
         this._get(this.url)
         .then(cartObject => {
             this.items = cartObject.content;
@@ -18,11 +18,7 @@ export default {
             this._render();
             this._handleEvents();
         })
-    },
-
-    _get(url) {
-        return fetch(url).then(d => d.json()) 
-    },
+    }
 
     _handleEvents() {
         document.querySelector('#toggle-cart').addEventListener('click', () => {
@@ -34,7 +30,7 @@ export default {
                 this._remove(evt.target.dataset.id)
             }
         })
-    },
+    }
 
     _add(item) {
         let find = this.items.find(cartItem => cartItem.productId == item.productId);
@@ -45,7 +41,7 @@ export default {
             find.amount++;
         }
         this._render();
-    },
+    }
 
     _remove(id) {
         let find = this.items.find(cartItem => cartItem.productId == id);
@@ -56,40 +52,17 @@ export default {
             this.items.splice(this.items.indexOf(find), 1)
         }
         this._render();
-    },
+    }
 
     _render() {
         let htmlStr = '';
         this.items.forEach(item => {
-            htmlStr += `
-                <div class="cart-dropdown__checked-items">
-                    <img src="${item.productImg}" alt="pic">
-                    <div>
-                        <h3>${item.productName}</h3>
-                        <div><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                        <p>${item.amount} x $${item.productPrice}</p>
-                    </div>
-                    <button data-id=${item.productId} name="remove" class="fas fa-times-circle"></button>
-                </div>
-            `
+            htmlStr += new CartItem(item).render();
         })
-        htmlStr += `
-            <div class="cart-dropdown__sum">
-                <div>total</div>
-                <div>$${this._totalPrice()}</div>
-            </div>
-        `;
+        htmlStr += new CartTotalPrice(this.items).render();
         this.container.innerHTML = htmlStr;
         this.qtyContainer.innerHTML = this._totalQty();
-    },
-
-    _totalPrice() {
-        let sum = 0;
-        for(let item of this.items) {
-            sum += item.productPrice * item.amount;
-        }
-        return sum;
-    },
+    }
 
     _totalQty() {
         let qty = 0;
