@@ -10,7 +10,7 @@ export default {
     imgFTPurl: 'https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/infeature',
     url: 'https://raw.githubusercontent.com/Nicknk77/img/master/dist/catalog.json',
     
-    init() {
+    init(basket) {
         this.container = document.querySelector('#catalog');
         this.basket = basket;
         // this.items = getItems();
@@ -79,16 +79,3 @@ export default {
         this.container.innerHTML = str;
         }
 }
-
-// catalog.init();
-
-// function createNewItem(name, price, stars) {
-//     return {
-//         productName: name,
-//         productPrice: price,
-//         productStars: stars
-//     }
-// }
-// function getItems() {
-//     return NAMES.map(function(name, index) { return createNewItem(NAMES[index], PRICES[index], STARS[index])  });
-// }

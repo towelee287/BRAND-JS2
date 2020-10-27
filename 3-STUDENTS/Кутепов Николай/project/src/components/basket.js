@@ -10,6 +10,7 @@ export default {
         this.wrapper = document.querySelector('#basket');
         this.container = document.querySelector('#basket-list');
         this.basket_link = document.querySelector("#basket-link");
+        console.log(this._get(this.url));
         this._get(this.url)
         .then(basketObject => {
             this.items = basketObject.content;
