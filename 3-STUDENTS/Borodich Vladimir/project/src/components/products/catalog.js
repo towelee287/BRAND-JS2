@@ -1,7 +1,6 @@
-import ProductContainer from './product-container';
+import ProductList from './product-list';
 
-
-class Catalog extends ProductContainer {
+class Catalog extends ProductList {
     constructor(container, url = '') {
         super(container, url);
     }

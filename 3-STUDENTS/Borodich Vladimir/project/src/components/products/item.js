@@ -1,6 +1,6 @@
 import Stars from './stars';
 
-class ProductItem {
+class Item {
     constructor(item, target, baseImgUrl = 'https://raw.githubusercontent.com/wowankz/static/master/shop/' + 'img/') {
         this.item = item;
         this.target = target;
@@ -67,4 +67,4 @@ class ProductItem {
     }
 }
 
-export default ProductItem;
+export default Item;

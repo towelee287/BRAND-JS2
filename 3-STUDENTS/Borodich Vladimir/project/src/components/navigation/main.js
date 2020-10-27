@@ -1,6 +1,6 @@
-import Menu from './menu.js';
+import Navigation from './navigation.js';
 
-class MainMenu extends Menu {
+class MainNavigation extends Navigation {
     constructor() {
         super();
         this._container = document.querySelector('#main-menu');
@@ -47,4 +47,4 @@ class MainMenu extends Menu {
     }
 }
 
-export default MainMenu;
+export default MainNavigation;

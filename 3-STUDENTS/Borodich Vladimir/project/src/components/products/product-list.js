@@ -1,8 +1,8 @@
-import ProductItem from './product-item';
-class ProductContainer {
+import Item from './item';
+class ProductList {
     constructor(container, url = '') {
         this._items = null;
-        this._baseUrl = 'https://raw.githubusercontent.com/wowankz/static/master/shop/'
+        this._baseUrl = 'https://raw.githubusercontent.com/wowankz/static/master/shop/';
         this._url = this._baseUrl + url;
         this._container = null;
         this._containerName = container;
@@ -18,13 +18,13 @@ class ProductContainer {
         let content = '';
         if (this._items.length > 0) {
             this._items.forEach((item) => {
-                content += new ProductItem(item, this._containerName).render();
+                content += new Item(item, this._containerName).render();
             });
         } else {
-            content = new ProductItem(null, this._containerName).render();
+            content = new Item(null, this._containerName).render();
         }
         this._container.innerHTML = content;
     }
 }
 
-export default ProductContainer;
+export default ProductList;

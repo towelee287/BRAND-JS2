@@ -1,6 +1,6 @@
-import Menu from './menu.js';
+import Navigation from './navigation.js';
 
-class FooterMenu extends Menu {
+class FooterNavigation extends Navigation {
     constructor() {
         super('footer-menu.json');
     }
@@ -19,4 +19,4 @@ class FooterMenu extends Menu {
     }
 }
 
-export default FooterMenu;
+export default FooterNavigation;
