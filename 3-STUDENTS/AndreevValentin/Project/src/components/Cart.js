@@ -6,10 +6,21 @@ export default class Cart {
 		this.popup = document.getElementById("cartPopup");
 		this.itemsWrapper = document.getElementById("cartPopupItems");
 		this.totalBox = document.getElementById("cartPopupTotal");
-		this.items = [];
+		this.items = {};
 
-		this._handleEvents();
-		this._render();
+		fetch(
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/cart.json"
+		).then((response) => {
+			return response.json();
+		}).then((json) => {
+			json.forEach(jsonItem => {
+				this.items[jsonItem.id] = new CartItem(jsonItem.id, jsonItem.name,
+					jsonItem.price, jsonItem.img, jsonItem.qty);
+			});
+
+			this._handleEvents();
+			this._render();
+		});
 	}
 
 	_handleEvents() {
@@ -27,30 +38,28 @@ export default class Cart {
 
 	_render() {
 		this.itemsWrapper.innerHTML =
-			this.items.map(item => item.toHtml()).join("");
+			Object.values(this.items).map(item => item.toHtml()).join("");
 
-		const total = this.items.reduce((a, b) => a + b.price * b.qty, 0);
+		const total =
+			Object.values(this.items).reduce((a, b) => a + b.price * b.qty, 0);
 		this.totalBox.innerHTML =
 			`\$${Math.floor(total / 100)}.${padNum(total % 100)}`;
 	}
 
 	add(newItem) {
-		const item = this.items.find(x => x.id == newItem.id);
-		if(item === undefined) {
-			this.items.push(new CartItem(newItem));
+		if(newItem.id in this.items) {
+			++this.items[newItem.id].qty;
 		} else {
-			++item.qty;
+			this.items[newItem.id] = new CartItem(newItem);
 		}
 		this._render();
 	}
 
 	remove(id) {
-		const index = this.items.findIndex(x => x.id == id)
-		const item = this.items[index];
-		if(item.qty == 1) {
-			this.items.splice(index, 1);
+		if(this.items[id].qty == 1) {
+			delete this.items[id];
 		} else {
-			--item.qty;
+			--this.items[id].qty;
 		}
 		this._render();
 	}

@@ -24,12 +24,23 @@ function getItems() {
 
 export default class Catalog {
 	constructor(cart, container, itemsPerRow) {
-		this.container = container;
-		this.items = getItems();
 		this.cart = cart;
+		this.container = container;
+		this.items = {};
 
-		this._handleEvents();
-		this._render(itemsPerRow);
+		fetch(
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/catalog.json"
+		).then((response) => {
+			return response.json();
+		}).then((json) => {
+			json.forEach(jsonItem => {
+				this.items[jsonItem.id] = new CatalogItem(jsonItem.id, jsonItem.name,
+					jsonItem.price, jsonItem.img);
+			});
+
+			this._handleEvents();
+			this._render(itemsPerRow);
+		});
 	}
 
 	_handleEvents() {
