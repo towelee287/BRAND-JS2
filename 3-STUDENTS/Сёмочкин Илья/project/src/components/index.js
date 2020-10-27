@@ -1,8 +1,8 @@
-import cart from './cart.js'
-import catalog from './catalog.js'
+import Cart from './cart.js'
+import Catalog from './catalog.js'
 
 
 export default () => {
-    cart.init();
-    catalog.init(cart);
+    let cart = new Cart();
+    let catalog = new Catalog(cart);
 }
