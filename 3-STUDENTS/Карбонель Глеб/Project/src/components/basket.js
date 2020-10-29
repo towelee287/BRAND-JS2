@@ -1,30 +1,10 @@
-import BasketItem from './basketItem.js';
+import SHOP from './SHOP.js';
 
-export default class Basket {
+export default class Basket extends SHOP{
 
-    constructor(container = '#basket', url = '/basket.json'){
-        this.items = [];
-        this.wrapper = null;
-        this.container = document.querySelector(container);
-        this.url = 'https://raw.githubusercontent.com/kellolo/static/master/JSON/' + url;
-        this._init();
-    }
-
-    _init() {
+    constructor(container = '#basket', url = '/basket.json', basket = null){
+        super(basket, container, url);
         this.wrapper = document.querySelector('.drop-cart');
-
-        this._get(this.url)
-            .then(basketObject => {
-                this.items = basketObject.content
-            })
-            .then(() => {
-                this._render();
-                this._handleEvents();
-            })
-    }
-
-    _get(url) {
-        return fetch(url).then(d => d.json()) //на выходе из этого метода вы получите полноценный объект(массив) с данными
     }
 
     _handleEvents() {
@@ -51,6 +31,7 @@ export default class Basket {
         }
         this._render();
     }
+
     remove(id) {
         let find = this.items.find(basketItem => basketItem.productId == id);
 
@@ -60,12 +41,5 @@ export default class Basket {
             this.items.splice(this.items.indexOf(find), 1);
         }
         this._render();
-    }
-    _render() {
-        let htmlStr = '';
-        this.items.forEach((item) => {
-            htmlStr += new BasketItem(item).render();
-        });
-        this.container.innerHTML = htmlStr;
     }
 }
