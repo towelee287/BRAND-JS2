@@ -13,7 +13,7 @@ export default class CartTotalPrice {
 
     render() {
         return `
-                <div class="cart-dropdown__sum">
+                <div id="total" class="cart-dropdown__sum">
                     <div>total</div>
                     <div>$${this.totalPrice()}</div>
                 </div>
