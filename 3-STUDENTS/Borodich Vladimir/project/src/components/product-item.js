@@ -1,3 +1,5 @@
+import Stars from './stars';
+
 class ProductItem {
 
   constructor(item, target, baseImgUrl) {
@@ -16,11 +18,7 @@ class ProductItem {
                     <div class="drop-cart__product-info">
                         <a href="product.html" class="drop-cart__product-name">${this.item.name}</a>
                         <div class="drop-cart__product-stars">
-                            <i class="${this.item.stars > "0" ? "fas" : "far"} ${this.item.stars === "0.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "1" ? "fas" : "far"} ${this.item.stars === "1.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "2" ? "fas" : "far"} ${this.item.stars === "2.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "3" ? "fas" : "far"} ${this.item.stars === "3.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "4" ? "fas" : "far"} ${this.item.stars === "4.5" ? "fa-star-half-alt" : "fa-star"}"></i>
+                            ${new Stars(this.item.stars).render()}
                         </div>
                         <div class="drop-cart__product-price">
                             <span class="drop-cart__product-count">${this.item.amount} </span> x ${this.item.price}
@@ -48,11 +46,7 @@ class ProductItem {
                         <div class="card__price">
                           $${this.item.price}
                           <div class="card__stars">
-                              <i class="${this.item.stars > "0" ? "fas" : "far"} ${this.item.stars === "0.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "1" ? "fas" : "far"} ${this.item.stars === "1.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "2" ? "fas" : "far"} ${this.item.stars === "2.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "3" ? "fas" : "far"} ${this.item.stars === "3.5" ? "fa-star-half-alt" : "fa-star"}"></i>
-                              <i class="${this.item.stars > "4" ? "fas" : "far"} ${this.item.stars === "4.5" ? "fa-star-half-alt" : "fa-star"}"></i>
+                              ${new Stars(this.item.stars).render()}
                           </div>
                         </div>
                       </div>
