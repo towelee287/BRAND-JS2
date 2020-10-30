@@ -1,49 +1,39 @@
-import BasketItem from './basketItem.js'
+import { List } from './LIST.js';
 
-export default class Basket {
-    constructor(container = '#basket') {
-        this.items = [];
-        this.container = document.querySelector(container);
-        //this.url = 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json';
-        this._init();
-     }
+export class Basket extends List {
+    constructor(container = '#basket', url = '/basket.json', basket = null) {
+        super(basket, container, url);
+        this.type = 'basket';
+    }
+
+
+    _handleEvents() {
+        this.container.addEventListener('click', e => {
+            if (e.target.name == 'remove') {
+                this.remove(e.target.dataset.id);
+            };
+        });
+    }
     
-    _init() {
-            this._render();
-            this._handleActions();
-        }
-     _handleActions() {
-            this.container.addEventListener('click', evt => {
-                if (evt.target.name == 'remove') {
-                    this.remove(evt.target.dataset.id);
-                }
-            })
-        }
-     _render() {
-            let str = "";
-            this.items.forEach(item => {
-                str += new BasketItem(item).render();
-            })
-            this.container.innerHTML = str;
-        }
-        add(item) {
-            let find = this.items.find(el => el.id == item.id);
-            if (!find) {
-                this.items.push(item);
-            }
-            else {
-                find.amount++;
-            }
-            this._render();
-        }
-        remove(itemId) {
-            let find = this.items.find(el => el.id == itemId);
-            if (find.amount > 1) {
-                find.amount--;
-            }
-            else {
-                this.items.splice(this.items.indexOf(find), 1);
-            }
-            this._render();
-        }
-}
+    
+    add(item) {
+        let find = this.items.find(basketItem => basketItem.productId == item.productId);
+        if (!find) {
+            this.items.push(Object.assign({}, item, { amount: 1 }));
+        } else {
+            find.amount++;
+          }
+        this._render();
+    }
+    
+    
+    remove(id) {
+        let find = this.items.find(basketItem => basketItem.productId == id);
+        if (find.amount > 1) {
+            find.amount--;
+        } else {
+            this.items.splice(this.items.indexOf(find), 1);
+          }
+        this._render();
+    }
+};
