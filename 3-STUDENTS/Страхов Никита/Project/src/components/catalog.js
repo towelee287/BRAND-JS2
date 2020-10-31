@@ -1,14 +1,14 @@
 
-export default{
-    items: [],
-    basket: null,
-    container: null,
-    imgFTPurl: 'https://raw.githubusercontent.com/nstr89/static/main/img/JS1_shop',
-    url: 'https://raw.githubusercontent.com/nstr89/static/main/JSON/catalog.json',
-    init(basket) {
-        this.container = document.querySelector('#catalog');
+export default class Catalog {
+    constructor(basket, container = '#catalog', url = '/catalog.json') {
+        this.items = [];
         this.basket = basket;
-        // this.items = getItems();
+        this.container = document.querySelector(container);
+        this.url = 'https://raw.githubusercontent.com/nstr89/static/main/JSON'+url;
+        this.imgFTPurl = 'https://raw.githubusercontent.com/nstr89/static/main/img/JS1_shop';
+        this._init();
+    }
+    _init() {
         this._get(this.url)
         .then(items => {
             this.items = items;
@@ -18,11 +18,10 @@ export default{
             this._handleEvents();
         })
 
-        // this._handleEvents();
-    },
+    }
     _get(url) {
         return fetch(url).then(d => d.json()) //на выходе из этого метода вы получите полноценный объект(массив) с данными
-    },
+    }
     _handleEvents() {
         this.container.addEventListener('click', e => {
             if (e.target.name == 'add') {
@@ -35,7 +34,7 @@ export default{
                 this.basket.add(item)
             }
         })
-    },
+    }
     _render() {
         let htmlStr = '';
         this.items.forEach((item, index) => {
