@@ -1,7 +1,7 @@
-import basket from './basket.js'
-import catalog from './catalog.js'
+import Basket from './basket.js'
+import Catalog from './catalog.js'
 
 export default () => {
-    basket.init();
-    catalog.inint();
+    let bascet = new Basket();
+    let catalog = new Catalog(bascet);
 }
