@@ -12,6 +12,9 @@ body {
 body a, body button, input[type="submit"] {
     transition-duration: 0.2s;
 }
+a {
+    text-decoration: none !important;
+}
 .container {
     margin: 0 auto;
     max-width: 1140px;
@@ -242,7 +245,7 @@ body a, body button, input[type="submit"] {
     color: #ffffff;
     font-size: 15px;
     letter-spacing: 0.38px;
-    width: 105px;
+    /* width: 105px; */
     padding: 13px 12px 11px 19px;
     margin-bottom: 11px;
 }
@@ -286,10 +289,11 @@ body a, body button, input[type="submit"] {
 }
 .second-block {
     height: inherit;
-    background-image: url(../../assets/img/layer24.jpg);
+    background-image: url(https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/layer24.jpg);
     background-repeat: no-repeat;
     background-position: right -17px;
 }
+
 .forBorder {
     display: flex;
     flex-direction: column;
@@ -322,6 +326,8 @@ body a, body button, input[type="submit"] {
 }
 .hot-offers {
     flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
 }
 
 .hot-offers__square {
@@ -336,10 +342,6 @@ body a, body button, input[type="submit"] {
 .hot-offers__square :hover {
     cursor: pointer;
     opacity: 0.8;
-}
-
-.hot-offers__left {
-    margin-right: 20px;
 }
 
 .hot-offers__text {
@@ -408,8 +410,7 @@ body a, body button, input[type="submit"] {
     width: 260px;
     background-color: #e9e9e9;
 }
-.hot-offer__shadow img{
-}
+
 .hot-offer {
     display: block;
     margin-bottom: 39px;
@@ -473,13 +474,13 @@ body a, body button, input[type="submit"] {
 .hot-offer__stars > div, .hot-offer__stars-basket > div {
     width: 14px;
     height: 14px;
-    background-image: url("../../assets/img/star-full.png");
+    background-image: url(https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/star-full.png);
 }
 div.half-star {
-    background-image: url("../../assets/img/star-half.png");
+    background-image: url(https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/star-half.png);
 }
 div.empty-star {
-    background-image: url("../../assets/img/star-empty.png");
+    background-image: url(https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/star-empty.png);
 }
 .hot-offer__square {
     background-color: rgba(90,90,90,0.7);
@@ -540,7 +541,7 @@ div.empty-star {
     height: 529px;
     background-color: #222224;
     margin-top: 113px;
-    background-image: url(../../assets/img/bg-offer-women.jpg);
+    background-image: url(https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/bg-offer-women.jpg);
     background-repeat: no-repeat;
     background-position: left top;
     flex-direction: column;
@@ -607,7 +608,7 @@ div.empty-star {
     margin-bottom: 109px;
     width: 100%;
     height: 438px;
-    background-image: url(../../assets/img/bg-subscibe.jpg);
+    background-image: url(https://raw.githubusercontent.com/Nicknk77/img/master/GB_img/bg-subscibe.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #f4f4f5
@@ -753,7 +754,8 @@ div.empty-star {
     }
 
     .hot-offers__right {
-        margin: 0 auto;
+        margin-top: 0;
+        /* margin: 0 auto; */
     }
 }
 
