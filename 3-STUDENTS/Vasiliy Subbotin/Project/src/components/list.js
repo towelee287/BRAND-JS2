@@ -1,6 +1,7 @@
-export default class PatentClass {
-    constructor(container, url, template_item) {
-        this.template_item = template_item
+import Item from './item'
+
+export default class List {
+    constructor(container, url) {
         this.items = [];
         this.container = document.querySelector(container);
         this.url = 'https://raw.githubusercontent.com/kellolo/static/master/JSON' + url;
@@ -30,7 +31,7 @@ export default class PatentClass {
     _render() {
         let htmlStr = '';
         this.items.forEach((item) => {
-            htmlStr += new this.template_item(item).render();
+            htmlStr += new Item(item, this.type).render();
         });
         this.container.innerHTML = htmlStr;
     }
