@@ -5,6 +5,7 @@ export default class Catalog extends Parent{
     constructor(basket, container = '#catalog', url = 'catalog.json', my_item) {
         super(container, url, my_item);
         this.basket = basket;
+        this.my_item = CatalogItem;
     }
     _init() {
         this._get(this.url)

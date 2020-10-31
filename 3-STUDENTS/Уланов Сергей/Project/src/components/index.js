@@ -2,8 +2,7 @@ import Basket from './basket.js';
 import Catalog from './catalog.js';
 
 export default ()=>{
-    let cart = new Basket;
-    //let goods = new Catalog;
-    cart.init();
-    goods.init(cart);
+    let basket = new Basket;
+    let catalog = new Catalog(basket);
+    
 }

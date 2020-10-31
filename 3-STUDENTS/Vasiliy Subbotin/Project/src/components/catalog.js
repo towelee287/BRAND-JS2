@@ -1,9 +1,9 @@
-import CatalogItem from './catalogitem.js';
-import ParentClass from './parentclass';
+import List from './list';
 
-export default class Catalog extends ParentClass {
-    constructor(basket, container, url) {
-        super('#catalog', '/catalog.json', CatalogItem)
+export default class Catalog extends List {
+    constructor(basket, container = '#catalog', url = '/catalog.json') {
+        super(container, url)
+        this.type = 'catalog';
         this.basket = basket;
     }
     

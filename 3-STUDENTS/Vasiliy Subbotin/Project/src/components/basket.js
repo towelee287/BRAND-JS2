@@ -1,9 +1,9 @@
-import BasketItem from './basketitem.js'
-import ParentClass from './parentclass'
+import List from './list';
 
-export default class Basket extends ParentClass{
-    constructor(container, url, template_item) {
-        super('#basket', '/basket.json', BasketItem)
+export default class Basket extends List{
+    constructor(container = '#basket', url = '/basket.json') {
+        super(container, url)
+        this.type = 'basket'
         this.wrapper = document.querySelector('.drop-cart');
         }
 

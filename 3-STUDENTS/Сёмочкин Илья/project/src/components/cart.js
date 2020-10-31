@@ -1,23 +1,12 @@
-import ObjectCreator from './objectCreator.js'
-import CartItem from './cartItem.js'
+import LIST from './LIST.js'
 import CartTotalPrice from './cartTotalPrice.js'
 
-export default class Cart extends ObjectCreator {
-    constructor(container = '#checked-items', url = '/cart.json', items) {
-        super(container, url, items)
+export default class Cart extends LIST {
+    constructor(cart = null, container = '#checked-items', url = '/cart.json') {
+        super(cart, container, url)
         this.wrapper = document.querySelector('.cart-dropdown');
+        this.totalContainer = document.querySelector('#sum');
         this.qtyContainer = document.querySelector('#qty');
-    }
-    
-    _init() {
-        this._get(this.url)
-        .then(cartObject => {
-            this.items = cartObject.content;
-        })
-        .then(() => {
-            this._render();
-            this._handleEvents();
-        })
     }
 
     _handleEvents() {
@@ -41,6 +30,7 @@ export default class Cart extends ObjectCreator {
             find.amount++;
         }
         this._render();
+        this._renderTotal();
     }
 
     _remove(id) {
@@ -52,15 +42,13 @@ export default class Cart extends ObjectCreator {
             this.items.splice(this.items.indexOf(find), 1)
         }
         this._render();
+        this._renderTotal();
     }
 
-    _render() {
+    _renderTotal() {
         let htmlStr = '';
-        this.items.forEach(item => {
-            htmlStr += new CartItem(item).render();
-        })
         htmlStr += new CartTotalPrice(this.items).render();
-        this.container.innerHTML = htmlStr;
+        this.totalContainer.innerHTML = htmlStr;
         this.qtyContainer.innerHTML = this._totalQty();
     }
 

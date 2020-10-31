@@ -1,22 +1,9 @@
-import ObjectCreator from './objectCreator.js'
-import CatalogItem from './catalogItem.js';
+import LIST from './LIST.js'
 
 
-export default class Catalog extends ObjectCreator {
-    constructor(cart, container = '#items-catalog', url = '/catalog.json', items) {
-        super(container, url, items)
-        this.cart = cart;
-    }
-
-    _init() { 
-        this._get(this.url) 
-        .then(items => { 
-            this.items = items;
-        })
-        .then(() => { 
-            this._render();
-            this._handleEvents();
-        })
+export default class Catalog extends LIST {
+    constructor(cart, container = '#items-catalog', url = '/catalog.json') {
+        super(cart, container, url)
     }
 
     _handleEvents() {
@@ -30,14 +17,6 @@ export default class Catalog extends ObjectCreator {
                 }); 
             }
         })
-    }                        
-
-    _render() { 
-        let htmlStr = ''; 
-        this.items.forEach(item => {
-            htmlStr += new CatalogItem(item).render();
-        });
-        this.container.innerHTML = htmlStr;
-    }
+    }  
 }
        
