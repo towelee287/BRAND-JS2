@@ -9,7 +9,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'), //путь к папке
         filename: 'js/bundle.js' //путь к файлу
     },
-    mode: 'production', //замена аналогичному свойству в файле package.json ------> определение режима отображения сборки
+    mode: 'development', //замена аналогичному свойству в файле package.json ------> определение режима отображения сборки
     plugins: [ //далее подключаем плагины, которые будут работать по html, css и прикрепленным изображениям (копирование файлов)
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html')
