@@ -1,22 +1,25 @@
 import {padNum} from "./common.js";
 import CartItem from "./CartItem.js";
+import ItemList from "./ItemList.js";
 
-export default class Cart {
+export default class Cart extends ItemList {
 	constructor() {
-		this.popup = document.getElementById("cartPopup");
-		this.itemsWrapper = document.getElementById("cartPopupItems");
-		this.totalBox = document.getElementById("cartPopupTotal");
-		this.items = [];
+		super(document.getElementById("cartPopupItems"),
+			"https://raw.githubusercontent.com/VoidPhantom/gbimg/master/cart.json");
 
-		this._handleEvents();
-		this._render();
+		this.totalBox = document.getElementById("cartPopupTotal");
+	}
+
+	_makeItemObject(jsonItem) {
+		return new CartItem(jsonItem.id, jsonItem.name, jsonItem.price,
+			jsonItem.img, jsonItem.qty);
 	}
 
 	_handleEvents() {
 		document.getElementById("cartPopupButton").addEventListener("click", () => {
-			this.popup.classList.toggle("hidden");
+			document.getElementById("cartPopup").classList.toggle("hidden");
 		});
-		this.itemsWrapper.addEventListener("click", e => {
+		this.container.addEventListener("click", e => {
 			if(!e.target.classList.contains("cartPopup__itemRemove")) {
 				return;
 			}
@@ -26,31 +29,28 @@ export default class Cart {
 	}
 
 	_render() {
-		this.itemsWrapper.innerHTML =
-			this.items.map(item => item.toHtml()).join("");
+		this.container.innerHTML = this._itemsToHtml();
 
-		const total = this.items.reduce((a, b) => a + b.price * b.qty, 0);
+		const total =
+			Object.values(this.items).reduce((a, b) => a + b.price * b.qty, 0);
 		this.totalBox.innerHTML =
 			`\$${Math.floor(total / 100)}.${padNum(total % 100)}`;
 	}
 
 	add(newItem) {
-		const item = this.items.find(x => x.id == newItem.id);
-		if(item === undefined) {
-			this.items.push(new CartItem(newItem));
+		if(newItem.id in this.items) {
+			++this.items[newItem.id].qty;
 		} else {
-			++item.qty;
+			this.items[newItem.id] = new CartItem(newItem);
 		}
 		this._render();
 	}
 
 	remove(id) {
-		const index = this.items.findIndex(x => x.id == id)
-		const item = this.items[index];
-		if(item.qty == 1) {
-			this.items.splice(index, 1);
+		if(this.items[id].qty == 1) {
+			delete this.items[id];
 		} else {
-			--item.qty;
+			--this.items[id].qty;
 		}
 		this._render();
 	}

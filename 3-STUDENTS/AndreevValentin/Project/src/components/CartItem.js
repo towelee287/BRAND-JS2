@@ -2,7 +2,7 @@ import {padNum} from "./common.js";
 import Item from "./Item.js";
 
 export default class CartItem extends Item {
-	constructor(id, name, price, img, qty) {
+	constructor() {
 		// We can construct a CartItem either from an Item or from raw values
 		if(arguments[0] instanceof Item) {
 			const [item, qty = 1] = arguments;

@@ -2,9 +2,10 @@ import BasketItem from './basketitem.js';
 import Parent from './parent_class.js'
 
 export default class Basket extends Parent{
-    constructor(container = "#basket", url = 'basket.json', my_item = BasketItem) {
+    constructor(container = "#basket", url = 'basket.json', my_item) {
         super(container, url, my_item);
-        this.wrapper = document.querySelector('.drop-cart');  
+        this.wrapper = document.querySelector('.drop-cart');
+        this.my_item = BasketItem; 
     }
     _init() {
         this._get(this.url)
