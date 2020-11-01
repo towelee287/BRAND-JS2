@@ -1,13 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {
+module.exports = {  
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/bundle.js'
+        filename: 'js/bundle.js',
     },
     mode: 'development',
     plugins: [
@@ -15,24 +15,23 @@ module.exports = {
             template: './public/index.html'
         }),
         new CopyPlugin({
-            patterns: [{ from: './src/assets/img/', to: './img' }],
-        }),
+            patterns: [{ from: './src/assets/img', to: './img' }],
+          }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].css',     // будет такой файл
-            chunkFilename: '[id].css'
-        }),
-
+            filename: './css/[name].css',
+            chunkFilename:'[id].css'
+        })
     ],
     module: {
-        rules: [
+        rules: [        // массив объектов
           {
-            test: /\.css$/i,    // расширение на которое обращает внимание webpack
-            use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            test: /\.css$/i,                                    // расширение, на которое webpack должен обращать внимание при переборе файлов при сборке
+            use: [MiniCssExtractPlugin.loader, 'css-loader'],   // что делать при нашёл
           },
           {
-              test: /\.(jpg|png|svg|jpeg|gif)$/i,
-              use: ['file-loader'],
-          },
-        ],
+            test: /\.(png|jpe?g|gif)$/i,
+            use: ['file-loader']
+          }
+        ]
       }
-}
+    }

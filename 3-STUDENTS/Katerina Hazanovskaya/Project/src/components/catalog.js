@@ -1,22 +1,12 @@
-import CatalogItem from './catalogItem.js';
-import HeadClass from './headClass.js';
+
+import LIST from './LIST.js';
 
 export default class Catalog  extends HeadClass {
-	constructor(basket, container, url) {
-		super(basket, '#catalog', '/catalog.json');
+	constructor(basket, container = '#catalog', url = '/catalog.json') {
+		super(basket, container, url);
+		this.type = 'catalog';
 	}
-   
-    _init() {
-        this._get(this.url)
-        .then(items => {
-            this.items = items;
-        })
-        .then(() => {
-            this._render();
-            this._handleEvents();
-        })
-	 }
-
+ 
     _handleEvents() {
         this.container.addEventListener('click', e => {
             if (e.target.name == 'add') {
@@ -29,15 +19,7 @@ export default class Catalog  extends HeadClass {
             }
         })
 	 }
-	 
-    _render() {
-        let htmlStr = '';
-        this.items.forEach((item, index) => {
-            let imgURL = `${this.imgFTPurl}/featuredItem${index + 1}.jpg`;
-            htmlStr += new CatalogItem(item).render();
-        });
-        this.container.innerHTML = htmlStr;
-    }
+
 }
 
 

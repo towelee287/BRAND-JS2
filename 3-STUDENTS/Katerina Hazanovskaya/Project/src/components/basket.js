@@ -1,22 +1,12 @@
-import BasketItem from './basketItem.js';
-import HeadClass from './headClass.js';
+
+import LIST from './LIST.js';
 
 export default class Basket extends HeadClass { 
-	constructor(basket, container, url) {
-		super(basket, '#basket', '/basket.json');
+	constructor(container = '#basket', url = '/basket.json', basket = null) {
+		super(basket, container, url);
+		this.wrapper = document.querySelector('.drop-cart');
+		this.type = 'basket';
 	}
-    init() {
-        this.wrapper = document.querySelector('.drop-cart');
-        
-        this._get(this.url)
-            .then(basketObject => {
-                this.items = basketObject.content
-            })
-            .then(() => {
-                this._render();
-                this._handleEvents();
-				})
-			 }
 
     _handleEvents() {
         document.querySelector('#toggle-basket').addEventListener('click', () => {
@@ -51,14 +41,6 @@ export default class Basket extends HeadClass {
             this.items.splice(this.items.indexOf(find), 1);
         }
         this._render();
-	 }
-	 
-    _render() {
-        let htmlStr = '';
-        this.items.forEach((item) => {
-            htmlStr += new BasketItem(item).render();
-        });
-        this.container.innerHTML = htmlStr;
 	 }
 	 
 }
