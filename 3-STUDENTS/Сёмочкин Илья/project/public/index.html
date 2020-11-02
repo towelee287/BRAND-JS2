@@ -41,12 +41,21 @@
             </div>
             <div class="header__right">
                 <div class="header__cart" id='header-cart'>
-                    <img src="../src/assets/img/cart.png" alt="cart" id="toggle-cart" @click="seen=!seen">
+                    <img 
+                        src="../src/assets/img/cart.png" 
+                        alt="cart" 
+                        id="toggle-cart"
+                        @click="cart.show = !cart.show"
+                     >
                     <div class="qty" id="qty">
                         {{ totalQty() }}
                     </div>
-                    <div class="cart-dropdown" v-if="seen">
-                        <div id="checked-items" v-for="item of cartItems">
+                    <div class="cart-dropdown" v-show="cart.show">
+                        <div 
+                            id="checked-items" 
+                            v-for="item of cart.items" 
+                            :key="item.productId"
+                        >
                             <div class="cart-dropdown__checked-items">
                                 <img :src="item.productImg" alt="pic">
                                 <div>
@@ -54,7 +63,7 @@
                                     <div><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
                                     <p>{{ item.amount }} x ${{ item.productPrice }}</p>
                                 </div>
-                                <button data-id=${item.productId} name="remove" class="fas fa-times-circle"></button>
+                                <button @click="remove(item.productId)" name="remove" class="fas fa-times-circle"></button>
                             </div>
                         </div>
                         <div id="sum">
@@ -123,11 +132,15 @@
             </div>
             <div id="items-catalog" class="featured-items__list">
                 <!-- этот блок заполняется с помощью js-логики -->
-                <div class="featured-items__item" v-for="item of items">
+                <div 
+                    class="featured-items__item" 
+                    v-for="item of catalog.items" 
+                    :key="item.productId"
+                >
                     <div class="featured-items__item-top"><img :src="item.productImg" alt="t-shirt">
                         <div class="add-hover-div">
                             <div>
-                                <button @click="buy(item)"><img src="../src/assets/img/cart_small.png" alt="cart_small">Add to Cart</button>
+                                <button name="add" @click="add(item)"><img src="../src/assets/img/cart_small.png" alt="cart_small">Add to Cart</button>
                                 <a href="#"><i class="fas fa-retweet"></i></a>
                                 <a href="#"><i class="far fa-heart"></i></a>
                             </div>
