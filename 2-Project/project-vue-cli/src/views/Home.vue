@@ -16,34 +16,13 @@
               href="#" 
               class="header__cart" 
               id="toggle-basket" 
-              @click="basket.show = !basket.show"
+              @click="showBasket = !showBasket"
           >
               <div id="cart-badge" class="header__cart-badge">0</div>
               <img src="@/assets/img/cart.png" alt="card" class="header__cart-img">
           </a>
-          <div class="drop-cart" v-show="basket.show">
-              <div id="basket" >
-
-                  <div 
-                      class="drop-cart__product" 
-                      v-for="item of basket.items"
-                      :key="item.productId"
-                  >
-                      <a href="product.html" class="drop-cart__product-link">
-                          <img :src="item.productImg"
-                              alt="product" class="drop-cart__product-img">
-                      </a>
-                      <div class="drop-cart__product-info">
-                          <a href="product.html" class="drop-cart__product-name">{{ item.productName }}</a>
-                          
-                          <div class="drop-cart__product-price">
-                              <span class="drop-cart__product-count">{{ item.amount }} </span> x {{ item.productPrice }}
-                              <span class="drop-cart__product-sum"> = ${{ item.productPrice * item.amount }}</span>
-                          </div>
-                      </div>
-                      <a href="#" data-id="${item.productId}" name="remove" class="drop-cart__product-close far fa-times-circle"></a>
-                  </div>
-              </div>
+          <div class="drop-cart" v-show="showBasket">
+                <Basket ref="bask"/>
               <div class="drop-cart__total">
                   <span class="drop-cart__total-name">TOTAL</span>
                   <span id="basket-total" class="drop-cart__total-sum">$500.00</span>
@@ -74,8 +53,8 @@
           </div>
       </div>
   </div>
-  <div class="container hot-offers">
-  <div class="hot-offers__left">
+  <!--div class="container hot-offers">
+    <div class="hot-offers__left">
           <a class="hot-offers__square">
               <img src="@/assets/img/Layer 30.jpg" alt="">
               <div class="hot-offers__text">
@@ -123,7 +102,7 @@
               </div>
           </a>
       </div>
-  </div>
+  </div-->
   <div class="container featured-items">
       <div class="featured-items__title">
           <h2>Featured Items</h2>
@@ -247,49 +226,24 @@
 <script>
 // @ is an alias to /src
 import Catalog from '@/components/Catalog.vue';
+import Basket from '@/components/Basket.vue';
 
 export default {
-  name: 'Home',
-  components: { Catalog },
-  data() {
-    return {
-      basket: {
-        items: [],
-        url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json',
-        show: false
-      }
-    }
-  },
-  methods: {
-    get(url) {
-        return fetch(url)
-            .then(data => data.json())
-    },
-    add(product) {
-        let find = this.basket.items.find(el => el.productId == product.productId);
-            if (!find) {
-                let newItem = Object.assign({}, product, { amount: 1 });
-                this.basket.items.push(newItem);
-            } else {
-                find.amount++;
-            }
-    },        
-    remove(id) {
-        let find = this.basket.items.find(el => el.productId == id);
-        if (find.amount > 1) {
-            find.amount--;
-        } else {
-            this.basket.items.splice(this.basket.items.indexOf(find), 1);
+    name: 'Home',
+    components: { Catalog, Basket },
+    data() {
+        return {
+            showBasket: false
         }
+    },
+    methods: {
+        get(url) {
+            return fetch(url)
+                .then(data => data.json())
+        },
+    },
+    mounted() {
+        console.log(this);
     }
-},
-async mounted() {
-    try {
-        this.basket.items = (await this.get(this.basket.url)).content;
-    }
-    catch(err) {
-        console.log(err);
-    }
-}
 }
 </script>

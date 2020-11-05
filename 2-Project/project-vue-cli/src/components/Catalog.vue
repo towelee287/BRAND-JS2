@@ -15,14 +15,15 @@
 
 <script>
 import { get } from '@/core/requests'
-import Item from './CatalogItem'
+import Item from './Item.vue'
 
 export default {
     components: { Item },
     data() {
         return {
             items: [],
-            url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/catalog.json'
+            // url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/catalog.json',
+            url: '/api/catalog',
         }
     },
     async mounted() {
