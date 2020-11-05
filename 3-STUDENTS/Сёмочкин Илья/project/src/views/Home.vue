@@ -1,30 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<<<<<<< HEAD
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-    <title>Main page</title>
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
-</html>
-=======
-<head>
-    <meta charset="UTF-8">
-    <title>Главная</title>
-    <!-- <link rel="stylesheet" href="../src/layout/css/style.css"> -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
-          integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-</head>
-<body>
-    <div id="app">
+<template>
+    <div>
         <header class="header container">
             <div class="header__left">
-                <a href="index.html" class="header__logo"><img src="../src/assets/img/logo.png" alt="logo"> Bran<span>d</span></a>
+                <a href="index.html" class="header__logo"><img src="@/assets/img/logo.png" alt="logo"> Bran<span>d</span></a>
                 <form action="#" class="header__search" method="get">
                     <input type="checkbox" id="browse-checkbox">
                     <label for="browse-checkbox" class="browse">Browse <i class="fas fa-caret-down"></i></label>
@@ -53,44 +31,7 @@
                 </form>
             </div>
             <div class="header__right">
-                <div class="header__cart" id='header-cart'>
-                    <img 
-                        src="../src/assets/img/cart.png" 
-                        alt="cart" 
-                        id="toggle-cart"
-                        @click="cart.show = !cart.show"
-                     >
-                    <div class="qty" id="qty">
-                        {{ totalQty() }}
-                    </div>
-                    <div class="cart-dropdown" v-show="cart.show">
-                        <div 
-                            id="checked-items" 
-                            v-for="item of cart.items" 
-                            :key="item.productId"
-                        >
-                            <div class="cart-dropdown__checked-items">
-                                <img :src="item.productImg" alt="pic">
-                                <div>
-                                    <h3>{{ item.productName }}</h3>
-                                    <div><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                                    <p>{{ item.amount }} x ${{ item.productPrice }}</p>
-                                </div>
-                                <button @click="remove(item.productId)" name="remove" class="fas fa-times-circle"></button>
-                            </div>
-                        </div>
-                        <div id="sum">
-                            <div id="total" class="cart-dropdown__sum">
-                                <div>total</div>
-                                <div>${{ totalPrice() }}</div>
-                            </div>
-                        </div>
-                        <div class="cart-dropdown__buttons">
-                            <a href="checkout.html">checkout</a>
-                            <a href="shopping-cart.html">go to cart</a>
-                        </div>
-                    </div>
-                </div>
+                <Cart />
                 <a class="header__account-bar" href="#">My Account <i class="fas fa-caret-down"></i></a>
             </div>
         </header>
@@ -143,32 +84,7 @@
                 <div class="featured-items__header-top">Featured Items</div>
                 <div class="featured-items__header-bottom">Shop for items based on what we featured in this week</div>
             </div>
-            <div id="items-catalog" class="featured-items__list">
-                <!-- этот блок заполняется с помощью js-логики -->
-                <div 
-                    class="featured-items__item" 
-                    v-for="item of catalog.items" 
-                    :key="item.productId"
-                >
-                    <div class="featured-items__item-top"><img :src="item.productImg" alt="t-shirt">
-                        <div class="add-hover-div">
-                            <div>
-                                <button name="add" @click="add(item)"><img src="../src/assets/img/cart_small.png" alt="cart_small">Add to Cart</button>
-                                <a href="#"><i class="fas fa-retweet"></i></a>
-                                <a href="#"><i class="far fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="featured-items__item-bottom">
-                        <div>{{ item.productName }}</div>
-                        <div>${{ item.productPrice }}.00</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="featured-items__button">
-                <a href="#">Browse All Product <i class="fas fa-long-arrow-alt-right"></i></a>
-            </div>
+            <Catalog />
         </div>
         <div class="special-offer container">
             <div class="special-offer__info">
@@ -179,7 +95,7 @@
             </div>
             <div class="special-offer__general-info">
                 <div class="special-offer__general-info__div">
-                    <img src="../src/assets/img/truck.svg" alt="truck">
+                    <img src="@/assets/img/truck.svg" alt="truck">
                     <div class="special-offer__general-info__div-text">
                         <h3>Free Delivery</h3>
                         <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
@@ -187,7 +103,7 @@
                     </div>
                 </div>
                 <div class="special-offer__general-info__div">
-                    <img src="../src/assets/img/percentage.svg" alt="percentage">
+                    <img src="@/assets/img/percentage.svg" alt="percentage">
                     <div class="special-offer__general-info__div-text">
                         <h3>Sales & discounts</h3>
                         <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
@@ -195,7 +111,7 @@
                     </div>
                 </div>
                 <div class="special-offer__general-info__div">
-                    <img src="../src/assets/img/crown.svg" alt="crown">
+                    <img src="@/assets/img/crown.svg" alt="crown">
                     <div class="special-offer__general-info__div-text">
                         <h3>Quality assurance</h3>
                         <p>Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
@@ -208,7 +124,7 @@
             <div class="subscribe container">
                 <div class="subscribe-left">
                     <div class="subscribe-left__content">
-                        <div class="subscribe-left__content-photo"><img src="../src/assets/img/subscribe-woman-photo.jpg"
+                        <div class="subscribe-left__content-photo"><img src="@/assets/img/subscribe-woman-photo.jpg"
                                                                         alt="subscribe-woman-photo"></div>
                         <div class="subscribe-left__text">
                             <p class="subscribe-left__text-main">“Vestibulum quis porttitor dui! Quisque viverra nunc mi,
@@ -235,7 +151,7 @@
         </div>
         <div class="various-info container">
             <div class="brand__about">
-                <h2 class="header__logo"><img src="../src/assets/img/logo.png" alt="logo"> Bran<span>d</span></h2>
+                <h2 class="header__logo"><img src="@/assets/img/logo.png" alt="logo"> Bran<span>d</span></h2>
                 <p>Objectively transition extensive data rather than cross functional solutions. Monotonectally syndicate
                     multidisciplinary materials before go forward benefits. Intrinsicly syndicate an expanded array of processes
                     and cross-unit partnerships. </p><br>
@@ -278,7 +194,72 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-</body>
-</html>
->>>>>>> master
+</template>
+
+<script>
+// @ is an alias to /src
+
+import Cart from '@/components/Cart.vue'
+import Catalog from '@/components/Catalog.vue'
+
+
+export default {
+    name: 'Home',
+    components: { Cart, Catalog }
+    // data() {
+    //     return {
+    //         cart: {
+    //             items: [],
+    //             url: 'https://raw.githubusercontent.com/Eliasz-S/static/main/JSON/cart.json',
+    //             show: false
+    //         }
+    //     }
+    // },
+    // methods: {
+    //     get(url) {
+    //         return fetch(url).then(d => d.json()) 
+    //     },
+    //     add(item) {
+    //         let find = this.cart.items.find(cartItem => cartItem.productId == item.productId);
+    
+    //         if (!find) { 
+    //             this.cart.items.push(Object.assign({}, item, { amount: 1 }));
+    //         } else { 
+    //             find.amount++;
+    //         }
+    //     },
+    //     remove(id) {
+    //         let find = this.cart.items.find(cartItem => cartItem.productId == id);
+    
+    //         if (find.amount > 1) {
+    //             find.amount--;
+    //         } else {
+    //             this.cart.items.splice(this.cart.items.indexOf(find), 1)
+    //         }
+    //     },
+    //     totalPrice() {
+    //         let sum = 0;
+    //         for(let item of this.cart.items) {
+    //             sum += item.productPrice * item.amount;
+    //         }
+    //         return sum;
+    //     },
+    //     totalQty() {
+    //         let qty = 0;
+    //         for(let item of this.cart.items) {
+    //             qty += item.amount;
+    //         }
+    //         return qty;
+    //     }
+    // },
+
+    // async mounted() {
+    //     try {
+    //         this.cart.items = (await this.get(this.cart.url)).content;
+    //     }
+    //     catch(err) {
+    //         console.log(err);
+    //     }
+    // }
+}
+</script>
