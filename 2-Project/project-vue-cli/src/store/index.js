@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { get } from '@/core/requests';
+import { get, post, put, deleteReq } from '@/core/requests';
 
 Vue.use(Vuex)
 
@@ -28,28 +28,39 @@ export default new Vuex.Store({
       commit('basket_load', payload);
     },
     changeBasketItems({ commit, state }, payload) {
-      // payload === { item: {...}, action: 1 - add(2 - rem, 3 - change), amount: 1/-1 }
-
       if (!payload.action) {
-        console.log(111)
         let find = state.basket.find(el => el.productId == payload.item.productId);
         payload.action = find ? 3 : 1;
         payload.item = find ? find : Object.assign({}, payload.item, {amount: 1});
         payload.amount = 1;
-        console.log(payload)
       }
 
       switch (payload.action) {
         case 1: {
-          commit('basket_add', payload.item);
+          post('/api/basket', payload.item)
+            .then(res => {
+                if(res.status) {
+                  commit('basket_add', payload.item);
+                }
+            });
           break;
         }
         case 2: {
-          commit('basket_remove', payload.item);
-          break;
+          deleteReq('/api/basket/' + payload.item.productId)
+          .then(res => {
+              if(res.status) {
+                commit('basket_remove', payload.item);
+              }
+          });
+        break;
         }
         case 3: {
-          commit('basket_change', {item: payload.item, amount: payload.amount});
+          put('/api/basket/' + payload.item.productId, payload.amount)
+            .then(res => {
+                if(res.status) {
+                  commit('basket_change', {item: payload.item, amount: payload.amount});
+                }
+            });
           break;
         }
       }
