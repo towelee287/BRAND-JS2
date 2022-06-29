@@ -3,11 +3,25 @@
  "totalPrice": 203,
  "content": [
   {
-   "productName": "STRAWBERRY PEOPLE T-SHIRT",
-   "productPrice": 55,
-   "productImg": "https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop/featuredItem3.jpg",
-   "productId": "prod_2",
+   "productName": "MANGO PEOPLE T-SHIRT",
+   "productPrice": 52,
+   "productImg": "https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop/featuredItem1.jpg",
+   "productId": "prod_0",
    "amount": 1
+  },
+  {
+   "productName": "ORANGE PEOPLE T-SHIRT",
+   "productPrice": 67,
+   "productImg": "https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop/featuredItem4.jpg",
+   "productId": "prod_3",
+   "amount": 3
+  },
+  {
+   "productName": "CUCUMBER PEOPLE T-SHIRT",
+   "productPrice": 23,
+   "productImg": "https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop/featuredItem7.jpg",
+   "productId": "prod_6",
+   "amount": 2
   }
  ]
 }
